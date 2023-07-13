@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoriaService {
-  urlBase: string = "http://localhost:3000/api/categoria";
+  urlBase: string = "https://proyecto-final-pysw-backend.vercel.app/api/categoria";
 
   constructor(private _http:HttpClient) { }
 

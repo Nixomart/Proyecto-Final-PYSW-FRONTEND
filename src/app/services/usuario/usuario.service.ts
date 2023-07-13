@@ -8,7 +8,7 @@ import { Usuario } from 'src/app/models/usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-  urlBase: string = 'http://localhost:3000';
+  urlBase: string = 'https://proyecto-final-pysw-backend.vercel.app';
   constructor(private _http: HttpClient) {}
 
   

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PagoService {
-  urlBase: string = "http://localhost:3000/api/pagos";
+  urlBase: string = "https://proyecto-final-pysw-backend.vercel.app/api/pagos";
   
   constructor(private _http:HttpClient) { }
 

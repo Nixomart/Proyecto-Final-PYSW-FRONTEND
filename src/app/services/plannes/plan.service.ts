@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PlanService {
-  urlBase: string = "http://localhost:3000/api/plan";
+  urlBase: string = "https://proyecto-final-pysw-backend.vercel.app/api/plan";
 
   constructor(private _http:HttpClient) { }
 

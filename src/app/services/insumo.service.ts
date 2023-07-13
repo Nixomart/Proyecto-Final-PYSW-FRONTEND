@@ -8,7 +8,7 @@ import { Insumo } from '../models/insumo';
 })
 export class InsumoService {
 
-  urlBase: string = "http://localhost:3000/api/insumo";
+  urlBase: string = "https://proyecto-final-pysw-backend.vercel.app/api/insumo";
 
   constructor(private _http:HttpClient) { }
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EjercicioService {
-  urlBase: string = "http://localhost:3000/api/ejercicio";
+  urlBase: string = "https://proyecto-final-pysw-backend.vercel.app/api/ejercicio";
   constructor(private _http:HttpClient) { }
 
   public generarEjercicio(alumno: any, ejercicio:any): Observable<any> {

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MercadopService {
-  urlBase: string = "http://localhost:3000/api/mercadopago/crearpago";
+  urlBase: string = "https://proyecto-final-pysw-backend.vercel.app/api/mercadopago/crearpago";
 
   constructor(private _http:HttpClient) { }
 
