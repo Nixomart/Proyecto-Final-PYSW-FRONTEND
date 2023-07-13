@@ -1,0 +1,16 @@
+<app-navbargeneral></app-navbargeneral>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pago of pagoss">
+        <th scope="row">{{pago.descripcion}}</th>
+        <td>{{pago.precio}}</td>
+      </tr>
+     
+    </tbody>
+  </table>

@@ -1,0 +1,86 @@
+<app-navbargeneral></app-navbargeneral>
+
+<section class="bg-white m-5 shadow-lg p-5 rounded-5">
+  <div class="input-group mb-3">
+    <select
+      (change)="onCategoriaChange(form.categoria)"
+      [(ngModel)]="form.categoria"
+      class="form-select"
+      aria-label="Default select example"
+    >
+      <option selected>Selecciona una categoria</option>
+      <option value="INSUMO">INSUMMO</option>
+      <option value="PLAN MENSUAL">PLAN MENSUAL</option>
+    </select>
+  </div>
+
+  <div>
+    <div *ngIf="categoriaActual == 'INSUMO'" class="input-group mb-3">
+      <select
+        [(ngModel)]="insumo"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option selected>Selecciona una categoria</option>
+          <option *ngFor="let p of insumos" value="{{ p._id }}">
+            {{ p.nombre }}
+          </option>
+        </select>
+        <select
+        [(ngModel)]="alumno"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option selected>Selecciona una categoria</option>
+          <option  *ngFor="let p of alumnos" value="{{ p._id }}">
+            {{ p.nombre }}
+          </option>
+        </select>
+        <span class="input-group-text" id="basic-addon2">ALUMNO! </span>
+
+    </div>
+    <div *ngIf="categoriaActual == 'PLAN MENSUAL'" class="input-group column-gap-5 mb-3">
+      <div class="d-flex">
+        <select
+        [(ngModel)]="mp.descripcion"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option selected>Selecciona una categoria</option>
+          <option *ngFor="let p of planes" value="{{ p._id }}">
+            {{ p.nombrePlan }}
+          </option>
+        </select>
+        <span class="input-group-text" id="basic-addon2">Tipo de Plan </span>
+      </div>
+
+      <div class="d-flex"> 
+        <select
+        [(ngModel)]="alumno"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option selected>Selecciona una categoria</option>
+          <option  *ngFor="let p of alumnos" value="{{ p._id }}">
+            {{ p.nombre }}
+          </option>
+        </select>
+        <span class="input-group-text" id="basic-addon2">ALUMNO! </span>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">PRECIO</span>
+        <input [(ngModel)]="mp.precio" type="number" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+    </div>
+    <div *ngIf="qr !==null">
+
+        <img src="{{qr!}}" alt="">
+        
+        <h1 class="h6">compartir enlance: </h1>
+        <span class="h5">{{enlace}}</span>
+
+    </div>
+    <button class="btn btn-primary" (click)="generarqr()">GENERAR QR</button>
+    <button  class="btn btn-primary" (click)="guardarplan()">guardar plan</button>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+<app-navbargeneral></app-navbargeneral>
+<div class="p-5 bg-white shadow-lg mx-5 mt-5 rounded-5">
+  <h1>LISTADO DE ASISTENCIA</h1>
+  <table class="table px-5 bg-white">
+    <thead>
+      <tr>
+        <th scope="col">DNI</th>
+        <th scope="col">Nombre Apellido</th>
+        <th scope="col">Plan</th>
+        <th scope="col">Ingresar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alumno of alumnos">
+        <th scope="row">{{ alumno.dni }}</th>
+        <td>{{ alumno.nombre + " " + alumno.apellido }}</td>
+        <td>
+          {{ alumno.plan == null ? "No tiene plan" : alumno.plan.nombrePlan }}
+        </td>
+        <td>
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            class="btn btn-warning mx-1 my-1"
+            (click)="setearModificar(alumno)"
+          >
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">ASISTENCIA DE {{alumno?.nombre +" " +alumno?.apellido}}</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-text">
+            <label for="">Asistido? </label>
+            <input
+              [(ngModel)]="asistido"
+              class="form-check-input mt-0"
+              type="checkbox"
+              value=""
+              aria-label="Checkbox for following text input"
+            />
+          </div>
+        
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+        data-bs-dismiss="modal"
+          type="button"
+          (click)="modificar(alumno, asistido)"
+          class="btn btn-primary"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

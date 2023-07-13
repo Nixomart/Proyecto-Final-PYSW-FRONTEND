@@ -1,0 +1,138 @@
+<app-navbargeneral></app-navbargeneral>
+
+<div class="container">
+  <h1 class="text-center">Formulario de Insumos</h1>
+  <a class="btn btn-primary" href="/administrador/lista-insumos">Ver Listado</a>
+  <div
+    class="container"
+    style="color: rgb(253, 253, 253); background: #000; width: 700px"
+  >
+    <form>
+      <fieldset>
+        <legend class="text-center">Registrar Insumo</legend>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label"
+            >Ingresar nombre</label
+          >
+          <input
+            [(ngModel)]="insumo.nombre"
+            name="nombre"
+            type="text"
+            id=""
+            class="form-control"
+            placeholder=" Ejemplo: agua, proteina"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label"
+            >Ingresar descripción</label
+          >
+          <input
+            [(ngModel)]="insumo.descripcion"
+            name="descripcion"
+            type="text"
+            id=""
+            class="form-control"
+            placeholder=" Ejemplo: botellas de agua de 2 litros..."
+          />
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Ingresar precio</label>
+          <input
+            [(ngModel)]="insumo.precio"
+            name="precio"
+            type="number"
+            id=""
+            class="form-control"
+            placeholder="Ejemplo: 100000"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Ingresar URL imagen</label>
+          <input
+            [(ngModel)]="insumo.imagen"
+            name="precio"
+            type="text"
+            id=""
+            class="form-control"
+            placeholder="Ejemplo: 100000"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label"
+            >Ingresar numero de stock</label
+          >
+          <input
+            [(ngModel)]="insumo.stock"
+            name="stock"
+            type="number"
+            id=""
+            class="form-control"
+            placeholder=" Ejemplo: 100 "
+          />
+        </div>
+        <label class="form-label" for="cateogry">Categoria</label>
+        <select
+          name="cateogry"
+          [(ngModel)]="insumo.categoria"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option
+            *ngFor="let categoria of categorias"
+            value="{{ categoria._id }}"
+          >
+            {{ categoria.descripcion }}
+          </option>
+        </select>
+        <!-- EN PROCESO -->
+        <!-- <div class="mb-3">
+                    <label for="disabledTextInput" class="form-label">Añadir imagen</label>
+                    <input [(ngModel)]="insumo.imagen" type="file" id="imagen" class="form-control" placeholder="hacer click acá">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Categoría</label>
+                    <select class="form-control"name="" id="" [(ngModel)]="insumo.categoria">
+                        <option value="1">comida</option>
+                        <option value="2">bebida</option>
+                        <option value="3">suplemento</option>
+                        <option value="4">herramientas</option>
+                    </select>
+                  </div> -->
+        <button
+          *ngIf="accion === 'new'"
+          type="submit"
+          class="btn btn-success"
+          style="background-color: chocolate"
+          (click)="crearInsumo()"
+        >
+          Guardar Insumo
+        </button>
+        <button
+          *ngIf="accion === 'update'"
+          type="submit"
+          class="btn btn-success"
+          style="background-color: chocolate"
+          (click)="confirmarModificacion()"
+        >
+          Modificar Insumo
+        </button>
+      </fieldset>
+    </form>
+  </div>
+
+  <!-- <form>
+            <div class="form-group">
+                <label for="titulo">Titulo</label>
+                <input type="text" class="form-control" id="titulo"[(ngModel)]="pelicula.titulo" name="titulo">
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría</label>
+                <select class="form-control" id="categoria"[(ngModel)]="pelicula.categoria" name="categoria">
+                    <option *ngFor="let cat of categorias" [value]="cat">{{cat}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btnprimary" (click)="procesarForm()">Enviar</button>
+            <button type="button" class="btn btn-primary">Limpiar</button>
+        </form> -->
+</div>

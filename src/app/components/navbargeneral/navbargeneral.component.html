@@ -1,0 +1,154 @@
+<div *ngIf="rol != null" style="background-color: #eee" class="position-sticky top-0 z-3">
+  <nav
+    style="background-color: #eee"
+    class="navbar navbar-expand-lg bg-body-tertiary rounded-4 p-3 p-2 position-sticky top-0 shadow-lg"
+  >
+    <div class="container-fluid">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- ALUMNO FUNCIONES -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="rol.rol == 'alumno'">
+          <li class="nav-item">
+            <a
+              routerLink="/alumno/perfil"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Perfil</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLink="/alumno/cuota"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Ver Gym</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLink="/alumno/calendario"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Ver Calendario</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLink="/alumno/insumos"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Ver Insumos</a
+            >
+          </li>
+        </ul>
+          <!-- ALUMNO FUNCIONES -->
+
+        <!-- ENTRENADOR FUNCIONES -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="rol.rol == 'entrenador'">
+          <!-- ALUMNO FUNCIONES -->
+          <li class="nav-item">
+            <a
+              routerLink="/generarRutinas"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Generar Rutinas</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLink="/asistencia"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Asistencias</a
+            >
+          </li>
+          <!-- ALUMNO FUNCIONES -->
+        </ul>
+        <!-- ENTRENADOR FUNCIONES -->
+        <!-- ADMIN FUNCIONES -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="rol.rol == 'administrativo'">
+          <!-- ALUMNO FUNCIONES -->
+          <li class="nav-item">
+            <a
+              routerLink="/administrador/formpagos"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Crear pago</a
+            >
+            <a
+              routerLink="/administrador/formpagossss"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >lista pagos</a
+            >
+            <a
+              routerLink="/administrador/formulario/alumno"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Registrar Alumno</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLink="/administrador/lista-alumnos"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Lista Alumnos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLink="/administrador/formulario/insumo/0"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Registrar Isumo</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              routerLink="/administrador/lista-insumos"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Lista de Insumos</a
+            >
+          </li>
+         
+          <!-- ALUMNO FUNCIONES -->
+        </ul>
+        <!-- ADMIN FUNCIONES -->
+        <!-- encargado FUNCIONES -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="rol.rol == 'encargado'">
+          <!-- ALUMNO FUNCIONES -->
+         <h1>Bienvenido dueño!</h1>
+          <!-- ALUMNO FUNCIONES -->
+        </ul>
+        <!-- encargado FUNCIONES -->
+
+        <button (click)="signOut()">
+            Salir
+        </button>
+
+       
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>

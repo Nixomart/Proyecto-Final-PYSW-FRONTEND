@@ -1,0 +1,482 @@
+<app-navbargeneral></app-navbargeneral>
+<div class="p-5 bg-white shadow-lg mx-5 mt-5 rounded-5">
+  <h1>GENERAR RUTINAS</h1>
+  <table class="table px-5 bg-white">
+    <thead>
+      <tr>
+        <th scope="col">DNI</th>
+        <th scope="col">Nombre Apellido</th>
+        <th scope="col">Plan</th>
+        <th scope="col">Ingresar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alumno of alumnos">
+        <th scope="row">{{ alumno.dni }}</th>
+        <td>{{ alumno.nombre + " " + alumno.apellido }}</td>
+        <td>{{ alumno.plan == null ? "No tiene plan" : alumno.plan.nombrePlan }}</td>
+        <td>
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="setearModificar(alumno)"
+            class="btn btn-warning mx-1 my-1"
+          >
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div
+  *ngIf="alumnoa != null"
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Asignacion de rutina semanal!
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="mb-3">
+        <label for="disabledTextInput" class="form-label">{{
+          alumnoa.nombre + " "
+        }}</label>
+        {{ " " }}
+        <label for="disabledTextInput" class="form-label">{{
+          alumnoa.apellido
+        }}</label>
+
+        <!-- DEPENDE DEL MES QUE TIENE! -->
+
+        <div *ngIf="alumnoa.plan.nombrePlan === 'premium'">
+          <h3>DIA LUNES</h3>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Ejercicio</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Lunes[0].nombreEjercicio"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Repeticiones</span
+            >
+            <input
+              type="number"
+              [(ngModel)]="rutinasBueno.Lunes[0].repeticiones"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Varacion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Lunes[0].variacion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Demostracion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Lunes[0].demostracion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <h3>DIA MARTES</h3>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Ejercicio</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Martes[0].nombreEjercicio"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Repeticiones</span
+            >
+            <input
+              type="number"
+              [(ngModel)]="rutinasBueno.Martes[0].repeticiones"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Varacion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Martes[0].variacion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Demostracion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Martes[0].demostracion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <h3>DIA MIERCOLES</h3>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Ejercicio</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Miercoles[0].nombreEjercicio"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Repeticiones</span
+            >
+            <input
+              type="number"
+              [(ngModel)]="rutinasBueno.Miercoles[0].repeticiones"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Varacion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Miercoles[0].variacion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Demostracion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Miercoles[0].demostracion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <h3>DIA JUEVES</h3>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Ejercicio</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Jueves[0].nombreEjercicio"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Repeticiones</span
+            >
+            <input
+              type="number"
+              [(ngModel)]="rutinasBueno.Jueves[0].repeticiones"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Varacion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Jueves[0].variacion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Demostracion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Jueves[0].demostracion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <h3>DIA VIERNES</h3>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Ejercicio</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Viernes[0].nombreEjercicio"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Repeticiones</span
+            >
+            <input
+              type="number"
+              [(ngModel)]="rutinasBueno.Viernes[0].repeticiones"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Varacion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Viernes[0].variacion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Demostracion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasBueno.Viernes[0].demostracion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+        </div>
+        <div *ngIf="alumnoa.plan.nombrePlan === 'standart'">
+          <h3>DIA LUNES</h3>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Ejercicio</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasMala.Lunes[0].nombreEjercicio"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Repeticiones</span
+            >
+            <input
+              type="number"
+              [(ngModel)]="rutinasMala.Lunes[0].repeticiones"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Varacion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasMala.Lunes[0].variacion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Demostracion</span
+            >
+            <input
+              type="text"
+              [(ngModel)]="rutinasMala.Lunes[0].demostracion"
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div>
+            <h3>DIA MIERCOLES</h3>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Ejercicio</span
+              >
+              <input
+                type="text"
+                [(ngModel)]="rutinasMala.Miercoles[0].nombreEjercicio"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Repeticiones</span
+              >
+              <input
+                type="number"
+                [(ngModel)]="rutinasMala.Miercoles[0].repeticiones"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Varacion</span
+              >
+              <input
+                type="text"
+                [(ngModel)]="rutinasMala.Miercoles[0].variacion"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Demostracion</span
+              >
+              <input
+                type="text"
+                [(ngModel)]="rutinasMala.Miercoles[0].demostracion"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+          </div>
+          <div>
+            <h3>DIA VIERNES</h3>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Ejercicio</span
+              >
+              <input
+                type="text"
+                [(ngModel)]="rutinasMala.Viernes[0].nombreEjercicio"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Repeticiones</span
+              >
+              <input
+                type="number"
+                [(ngModel)]="rutinasMala.Viernes[0].repeticiones"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Varacion</span
+              >
+              <input
+                type="text"
+                [(ngModel)]="rutinasMala.Viernes[0].variacion"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default"
+                >Demostracion</span
+              >
+              <input
+                type="text"
+                [(ngModel)]="rutinasMala.Viernes[0].demostracion"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- DPENDIENDO DEL PLAN!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          (click)="guardar(alumnoa)"
+          type="button"
+          class="btn btn-primary"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

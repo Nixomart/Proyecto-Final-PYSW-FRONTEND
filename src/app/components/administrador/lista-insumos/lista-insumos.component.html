@@ -1,0 +1,162 @@
+<app-navbargeneral></app-navbargeneral>
+
+<div class="px-5">
+  <h1>LISTADO DE INSUMOS</h1>
+  <a class="btn btn-success" href="administrador/formulario/insumo/0"
+    >Registrar Insumo</a
+  >
+  <div class="d-flex align-items-center">
+    <label class="form-label mb-2" for="">filtrar por: </label>
+    <select class="form-select" style="width: min-content">
+      <option value="">opcion1</option>
+      <option value="">opcion2</option>
+      <option value="">opcion3</option>
+      <option value="">opcion4</option>
+    </select>
+    <button class="btn btn-warning">Fitrar</button>
+  </div>
+  <table class="table shadow-lg border-5">
+    <thead class="">
+      <tr>
+        <th scope="col">nombre</th>
+        <th scope="col">descripcion</th>
+        <th scope="col">precio</th>
+        <th scope="col">stock</th>
+        <th scope="col" class="text-center">imagen</th>
+        <th scope="col">categoria</th>
+        <th scope="col">acciones</th>
+      </tr>
+    </thead>
+    <tbody class="">
+      <tr *ngFor="let i of insumos">
+        <th>{{ i.nombre }}</th>
+        <td>{{ i.descripcion }}</td>
+        <td>{{ i.precio }}</td>
+        <td>{{ i.stock }}</td>
+        <td>
+          <img src="{{ i.imagen }}" class="w-50" />
+        </td>
+        <td>{{ i.categoria.descripcion }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="setearEdicion(i)"
+          >
+            Modificar
+          </button>
+          <button (click)="eliminarInsumo(i)" class="btn btn-danger mx-1 my-1">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div
+*ngIf="insumoa != null"
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">edicion de Insumo!</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="mb-3">
+        <label for="disabledTextInput" class="form-label"
+          >Ingresar nombre</label
+        >
+        <input
+          [(ngModel)]="insumoa.nombre"
+          name="nombre"
+          type="text"
+          id=""
+          class="form-control"
+          placeholder=" Ejemplo: agua, proteina"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="disabledTextInput" class="form-label"
+          >Ingresar descripción</label
+        >
+        <input
+          [(ngModel)]="insumoa.descripcion"
+          name="descripcion"
+          type="text"
+          id=""
+          class="form-control"
+          placeholder=" Ejemplo: botellas de agua de 2 litros..."
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Ingresar precio</label>
+        <input
+          [(ngModel)]="insumoa.precio"
+          name="precio"
+          type="text"
+          id=""
+          class="form-control"
+          placeholder="Ejemplo: 100000"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Ingresar URL imagen</label>
+        <input
+          [(ngModel)]="insumoa.imagen"
+          name="precio"
+          type="text"
+          id=""
+          class="form-control"
+          placeholder="Ejemplo: 100000"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="disabledTextInput" class="form-label"
+          >Ingresar numero de stock</label
+        >
+        <input
+          [(ngModel)]="insumoa.stock"
+          name="stock"
+          type="number"
+          id=""
+          class="form-control"
+          placeholder=" Ejemplo: 100 "
+        />
+      </div>
+      <label class="form-label" for="cateogry">Categoria</label>
+      <select
+        name="cateogry"
+        [(ngModel)]="insumoa.categoria"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option
+          *ngFor="let categoria of categorias"
+          value="{{ categoria._id }}"
+        >
+          {{ categoria.descripcion }}
+        </option>
+      </select>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button (click)="modificarInsumo()" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<app-navbargeneral></app-navbargeneral>
+
+<div class="py-3 px-3 shadow-lg">
+    <h1 class="text-uppercase">Insumos</h1>
+    <span class="h5">Filtrar por categoria</span>
+    <select (change)="onCategoriaChange(categoriaActual)"  [(ngModel)]="categoriaActual" class="form-select" aria-label="Default select example">
+        <option selected>Selecciona una categoria</option>
+        <option *ngFor="let categoria of categorias" value={{categoria.descripcion}}>{{categoria.descripcion}}</option>
+      </select>
+</div>
+
+<div class="row row-cols-3 mt-5 column-gap-5 justify-content-center mx-auto row-gap-5">
+  <div *ngFor="let insumo of insumos" class="w-1-4 border-0 shadow-lg rounded-4 px-1 ">
+    <img
+      src="{{ insumo.imagen }}"
+      class="card-img-top w-25 mx-auto img-card-cover"
+      alt="..."
+    />
+    <div class="card-body w-max p-1">
+      <h5 class="w-max">{{ insumo.nombre }}</h5>
+      <p class="card-text w-max">{{ insumo.description }}</p>
+      <p class="card-text w-max">{{ insumo.categoria.descripcion }}</p>
+      <p class="w-max">Stock Disponible: {{ insumo.stock }}</p>
+      <div class="d-flex w-max text-center">
+        <p class="my-auto px-2">${{ insumo.precio }}</p>
+        <a href="#" class="btn btn-primary">Comprar</a>
+    </div>
+  </div>
+</div>

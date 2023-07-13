@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AsistenciasComponent } from './asistencias.component';
+
+describe('AsistenciasComponent', () => {
+  let component: AsistenciasComponent;
+  let fixture: ComponentFixture<AsistenciasComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [AsistenciasComponent]
+    });
+    fixture = TestBed.createComponent(AsistenciasComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
