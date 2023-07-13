@@ -43,6 +43,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">ASISTENCIA DE {{alumno?.nombre +" " +alumno?.apellido}}</h1>
+        <span class="h4" *ngIf="check" >Este alumno Ya asistio</span>
+
         <button
           type="button"
           class="btn-close"
@@ -55,6 +57,7 @@
           <div class="input-group-text">
             <label for="">Asistido? </label>
             <input
+            [disabled]="check"
               [(ngModel)]="asistido"
               class="form-check-input mt-0"
               type="checkbox"
@@ -72,8 +75,9 @@
         <button
         data-bs-dismiss="modal"
           type="button"
-          (click)="modificar(alumno, asistido)"
+          [disabled]="check"
           class="btn btn-primary"
+          (click)="modificar(alumno, asistido)"
         >
           Save changes
         </button>
