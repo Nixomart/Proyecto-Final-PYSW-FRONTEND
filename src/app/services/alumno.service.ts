@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AlumnoService {
-
+  //CAMBIAR TODAS LAS URL BASE POR https://proyecto-final-pysw-backend.vercel.app
   urlBase: string = "http://localhost:3000/api/alumno";
 
   constructor(private _http:HttpClient) { }
