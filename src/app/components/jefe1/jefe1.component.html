@@ -1,0 +1,130 @@
+<app-navbar></app-navbar>
+<h1>Ingresar Datos a Buscar:</h1>
+<h1 class="text-center my-3">Estadísticas</h1>
+<div  class="my-3 d-flex">
+    <div class="filter-seccion mb-3 col-4">
+        <!---FORMULARIOS-->
+        <form action="" class=" ms-3" #form="ngForm">
+            <div class="mb-3">
+                
+         <h1>Ingresar Datos a Buscar:</h1>
+                <label class="form-label" for="tipo">Vizualizar</label>
+                <select class="form-select" name="tipo" id="tipo"  required>
+                    <option value="pagos" selected>Pagos</option>
+                    <option value="ingresosDeAlumnos">Ingresos de alumnos</option>
+                    <option value="asistencias">Asistencias</option>
+                </select>
+            </div>
+            <div class="">
+                <div class="mb-3">
+                    <label class="form-label" for="fechaInicio">Fecha Inicio</label>
+                    <input type="date" class="form-control" name="fechaInicio" id="fechaInicio"  required >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="fechaFin">Fecha Fin</label>
+                    <input type="date" class="form-control" name="fechaFin" id="fechaFin" required >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="tipo">Tipo Grafico Barras</label>
+                    <select class="form-select" name="tipo" id="tipo"  required>
+                        <option value="meses" selected>Meses</option>
+                        <option value="años">Años</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary" >Filtrar</button>
+                </div>
+            </div>
+        </form>
+        <h2>GRAFICO DE TORTA</h2>
+        <form action="" class=" ms-3" #form="ngForm">
+            <div class="mb-3">
+                <label class="form-label" for="tipo">Vizualizar</label>
+                <select class="form-select" name="tipo" id="tipo"  required>
+                    <option value="pagos" selected>Pagos</option>
+                    <option value="ingresosDeAlumnos">Ingresos de alumnos</option>
+                    <option value="asistencias">Asistencias</option>
+                </select>
+            </div>
+            <div class="">
+                <div class="mb-3">
+                    <label class="form-label" for="fechaInicio">Fecha Inicio</label>
+                    <input type="date" class="form-control" name="fechaInicio" id="fechaInicio"  required >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="fechaFin">Fecha Fin</label>
+                    <input type="date" class="form-control" name="fechaFin" id="fechaFin" required >
+                </div>
+             
+                <div class="mb-3">
+                    <button class="btn btn-primary" >Filtrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!---LA GRAFICA QUE SE MOSTRARA AL LADO DEL FORMULARIO-->
+    <div class="chartContainer estd-seccion my-3 ">
+        <h1 class="text-center my-3">Estadísticas</h1>
+        <div class="col-6 mx-auto">
+            
+            <form action="">
+                <div class="mb-3">
+                    <label for="tipoChart" class="form-label">Eliga gráfico a mostrar</label>
+                    <select class="form-select" name="tipoChart" id="tipoChart" >
+                        <option value="alumnos" selected>Alumnos</option>
+                        <option value="pagoCuotas">Cuotas</option>
+                        <option value="asistencias">Asistencia</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <!-- gráfico de barras -->
+        <div class="h-50 w-50 mx-auto" >
+            <h3 class="fst-italic text-center">Anuncios por mes</h3>
+            <canvas id="barChart"></canvas>
+        </div>
+        <!-- primer gráfico torta -->
+        <div class="h-25 w-25 mx-auto" >
+            <h3 class="fst-italic text-center">Anuncios por Contenido</h3>
+            <canvas id="pieChart1"></canvas>
+        </div>
+        <!-- gráfico 2 torta -->
+        <div class="h-25 w-25 mx-auto" >
+            <h3 class="fst-italic text-center">Anuncios por Destinatarios</h3>
+            <canvas id="pieChart2"></canvas>
+        </div>
+    </div>
+    <!---TERMINA-->
+    </div>
+
+<h1>Form</h1> 
+<div class="form">
+  <label for="value1">Value 1:</label>
+  <input type="number" id="value1" [(ngModel)]="formData.value1" class="form-input">
+  
+  <label for="value2">Value 2:</label>
+  <input type="number" id="value2" [(ngModel)]="formData.value2" class="form-input">
+  
+  <label for="value3">Value 3:</label>
+  <input type="number" id="value3" [(ngModel)]="formData.value3" class="form-input">
+  
+  <label for="value4">Value 4:</label>
+  <input type="number" id="value4" [(ngModel)]="formData.value4" class="form-input">
+  
+  <button (click)="updateChart()" class="form-button">Update Chart</button>
+</div>
+
+<div class="chartContainer">
+  <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartTitle" [dataLabels]="chartDataLabels"></apx-chart>
+</div>
+<h1>barras</h1>
+<canvas baseChart class="chart"
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+</canvas>
+
+<button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
