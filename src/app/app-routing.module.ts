@@ -20,6 +20,8 @@ import { GenerarRutinasComponent } from './components/entrenador/generar-rutinas
 import { FormularioPagosComponent } from './components/administrador/formulario-pagos/formulario-pagos.component';
 import { FormulariopagosssComponent } from './components/administrador/formulariopagosss/formulariopagosss.component';
 import { AsistenciasComponent } from './components/entrenador/asistencias/asistencias.component';
+import { FormularioEntrenadorComponent } from './components/administrador/formulario-entrenador/formulario-entrenador.component';
+import { ListaEntrenadoresComponent } from './components/administrador/lista-entrenadores/lista-entrenadores.component';
 
 
 const routes: Routes = [
@@ -30,9 +32,11 @@ const routes: Routes = [
   // Rutas del Administrador
   { path: 'administrador/formulario/insumo/:id', component:FormularioInsumosComponent},
   { path: 'administrador/lista-insumos', component:ListaInsumosComponent},
-  { path: 'administrador/formulario/alumno', component: FormularioAlumnoComponent},
+  // { path: 'administrador/formulario/alumno', component: FormularioAlumnoComponent},
   { path: 'administrador/formulario/alumno/:id', component: FormularioAlumnoComponent},
   { path: 'administrador/lista-alumnos', component: ListaAlumnosComponent},
+  { path: 'administrador/formulario/entrenador/:id', component: FormularioEntrenadorComponent},
+  { path: 'administrador/lista-entrenadores', component: ListaEntrenadoresComponent},
   { path: 'administrador/formpagos', component: FormularioPagosComponent},
   { path: 'administrador/formpagossss', component: FormulariopagosssComponent},
 

@@ -14,7 +14,8 @@ export class EntrenadorService {
   public createEntrenador(entrenador: Entrenador): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `${window.localStorage.getItem("token")}`
       }),
       params: new HttpParams()
     };
@@ -22,7 +23,7 @@ export class EntrenadorService {
     return this._http.post(this.urlBase + "/", body, httpOptions);
   }
 
-  public editEntrenador(entrenador: Entrenador): Observable<any> {
+  public updateEntrenador(entrenador: Entrenador): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -33,10 +34,11 @@ export class EntrenadorService {
     return this._http.put(this.urlBase + "/" + entrenador._id, body, httpOptions);
   }
 
-  public deleteEntrenador(id: string): Observable<any> {
+  public eliminarEntrenador(id: string): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `${window.localStorage.getItem("token")}`
       }),
       params: new HttpParams()
     };
@@ -44,10 +46,10 @@ export class EntrenadorService {
     return this._http.delete(this.urlBase + "/" + id, httpOptions);
   }
 
-  public getEntrenadores():Observable<any>{
+  public getEntrenadors():Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
-
+        // "Authorization": `${window.localStorage.getItem("token")}`
       }),
     }
     return this._http.get(this.urlBase + "/", httpOptions);
@@ -55,7 +57,7 @@ export class EntrenadorService {
 
   // Obtener entrenador segun el ID
 
-  public getEntrenadorId(id:string):Observable<any>{
+  public getEntrenadorById(id:string):Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
 

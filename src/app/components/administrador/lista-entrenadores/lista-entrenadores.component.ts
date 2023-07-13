@@ -50,7 +50,7 @@ export class ListaEntrenadoresComponent  implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.obtenerEntrenadors();
   }
 
 }

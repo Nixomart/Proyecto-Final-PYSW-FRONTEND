@@ -11,11 +11,70 @@ export class UsuarioService {
   urlBase: string = 'https://proyecto-final-pysw-backend.vercel.app';
   constructor(private _http: HttpClient) {}
 
-  
+  // Crear Usuario
+  public createUser(usuario:Usuario):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization": `${window.localStorage.getItem("token")}`
+      }),
+      params: new HttpParams()
+    };
+    let body = JSON.stringify(usuario);
+    return this._http.post(this.urlBase + "/api/usuario/", body, httpOptions);
+  }
+
+
+  public updateUsuario(usuario: Usuario): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization": `${window.localStorage.getItem("token")}`
+      }),
+      params: new HttpParams()
+    };
+    let body = JSON.stringify(usuario);
+    return this._http.put(this.urlBase + "/api/usuario/" + usuario._id, body, httpOptions);
+  }
+
+  public eliminarUsuario(id: string): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization": `${window.localStorage.getItem("token")}`
+      }),
+      params: new HttpParams()
+    };
+
+    return this._http.delete(this.urlBase + "/api/usuario/" + id, httpOptions);
+  }
+
+  public getUsuarios():Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": `${window.localStorage.getItem("token")}`
+      }),
+    }
+    return this._http.get(this.urlBase + "/api/usuario/", httpOptions);
+  }
+
+  // Obtener alumno segun el ID
+
+  public getUsuarioById(id:string):Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": `${window.localStorage.getItem("token")}`
+      }),
+      params: new HttpParams()
+    }
+    return this._http.get(this.urlBase + "/api/usuario/detalle/" + id, httpOptions);
+  }
+
+
   //crear usuario y alumno
   public createAlumnoYUsuario(alumno: any): Observable<any> {
     console.log("DATOS EN EL SERVICE:", alumno);
-    
+
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -40,7 +99,7 @@ export class UsuarioService {
     }
     return this._http.post(this.urlBase + "/api/usuario/login", body);
   };
-  
+
   //cuando resetea o se loguea la pagina obtiene los datos del usuario que se legeuo yo lo hice para alumnos
   //en el edpoint del back api/usuario/getuser esta el codigo pero solo para obtener la info del alumno
   //se puede hacer con los demas roles
@@ -49,7 +108,7 @@ export class UsuarioService {
       headers: new HttpHeaders({
         "Authorization": `${token}`
       }),
-      
+
       params: new HttpParams()
     };
     console.log("TOKEN EN GET DATA SERVICE: ", token)
