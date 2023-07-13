@@ -1,12 +1,12 @@
-<!-- <div class="container">
+<div class="container">
     <h1 class="text-center">Formulario de Entrenador</h1>
-    <button class="btn btn-success" (click)="guardarAlumno()">Agregar Alumno</button>
+    <button class="btn btn-success" (click)="guardarEntrenador()">Agregar Entrenador</button>
         <div class="container" style="color: rgb(253, 253, 253); background: #000; width: 700px;">
-            <form #formAlumno="ngForm">
-                <legend class="text-center">Registrar Alumno</legend>
+            <form #formEntrenador="ngForm">
+                <legend class="text-center">Registrar Entrenador</legend>
                 <div class="mb-3">
                     <label for="disabledTextInput" class="form-label">Ingresar nombre</label>
-                    <input [(ngModel)]="alumno.nombre" name="nombre" type="text" id="" class="form-control" placeholder=" Ejemplo: juan, marcos, julieta, etc..." required minlength="3" #nombre="ngModel" caracter-especial>
+                    <input [(ngModel)]="entrenador.nombre" name="nombre" type="text" id="" class="form-control" placeholder=" Ejemplo: juan, marcos, julieta, etc..." required minlength="3" #nombre="ngModel" caracter-especial>
                     <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
                             <div *ngIf="nombre.errors?.['required']">
                                 Nombre es requerido.
@@ -18,7 +18,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="disabledTextInput" class="form-label">Ingresar apellido</label>
-                    <input [(ngModel)]="alumno.apellido" name="apellido" type="text" id="" class="form-control" placeholder=" Ejemplo: Sanchez, Messi, Fernandez, etc.." required minlength="3" #apellido="ngModel">
+                    <input [(ngModel)]="entrenador.apellido" name="apellido" type="text" id="" class="form-control" placeholder=" Ejemplo: Sanchez, Messi, Fernandez, etc.." required minlength="3" #apellido="ngModel">
                     <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger">
                         <div *ngIf="apellido.errors?.['required']">
                             Apellido es requerido.
@@ -30,7 +30,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Ingresar DNI</label>
-                    <input [(ngModel)]="alumno.dni" name="dni" type="number" id="" class="form-control" placeholder="Ejemplo: 42682738" required minlength="7" #dni="ngModel">
+                    <input [(ngModel)]="entrenador.dni" name="dni" type="number" id="" class="form-control" placeholder="Ejemplo: 42682738" required minlength="7" #dni="ngModel">
                     <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">
                         <div *ngIf="dni.errors?.['required']">
                             DNI es requerido.
@@ -42,7 +42,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="disabledTextInput" class="form-label">Ingresar numero de celular</label>
-                    <input [(ngModel)]="alumno.nroCelular" name="nroCelular" type="text" id="" class="form-control" placeholder=" Ejemplo: 3881273823 " required minlength="9" #nroCelular="ngModel">
+                    <input [(ngModel)]="entrenador.nroCelular" name="nroCelular" type="text" id="" class="form-control" placeholder=" Ejemplo: 3881273823 " required minlength="9" #nroCelular="ngModel">
                     <div *ngIf="nroCelular.invalid && (nroCelular.dirty || nroCelular.touched)" class="alert alert-danger">
                         <div *ngIf="nroCelular.errors?.['required']">
                             NÚmero de celular es requerido.
@@ -54,7 +54,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="disabledTextInput" class="form-label">Ingresar domicilio</label>
-                    <input [(ngModel)]="alumno.domicilio" name="domicilio" type="text" id="" class="form-control" placeholder="Ejemplo: Barrio ... , Calle ... , num ..." required minlength="24" #domicilio="ngModel">
+                    <input [(ngModel)]="entrenador.domicilio" name="domicilio" type="text" id="" class="form-control" placeholder="Ejemplo: Barrio ... , Calle ... , num ..." required minlength="24" #domicilio="ngModel">
                     <div *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)" class="alert alert-danger">
                         <div *ngIf="domicilio.errors?.['required']">
                             Domicilio es requerido.
@@ -66,7 +66,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input [(ngModel)]="alumno.email" name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com"required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" #email="ngModel" />
+                    <input [(ngModel)]="entrenador.email" name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com"required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" #email="ngModel" />
                     <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
                     <div *ngIf="!email.valid && email.touched">
                       El email no es válido.
@@ -88,10 +88,10 @@
                     
                 </div>
                    
-                <button [disabled]="!formAlumno.form.valid" *ngIf="accion === 'new'" type="submit" class="btn btn-success " style="background-color: chocolate;" (click)="crearAlumno()">Guardar Alumno</button> 
-                 <button [disabled]="!formAlumno.form.valid" *ngIf="accion === 'update'" type="submit" class="btn btn-success " style="background-color: chocolate;" (click)="confirmarModificacion()">Modificar Alumno</button>
+                <button [disabled]="!formEntrenador.form.valid" *ngIf="accion === 'new'" type="submit" class="btn btn-success " style="background-color: chocolate;" (click)="crearEntrenador()">Guardar Entrenador</button> 
+                 <button [disabled]="!formEntrenador.form.valid" *ngIf="accion === 'update'" type="submit" class="btn btn-success " style="background-color: chocolate;" (click)="confirmarModificacion()">Modificar Entrenador</button>
 
                
             </form>
         </div>
-</div> -->
+</div>
