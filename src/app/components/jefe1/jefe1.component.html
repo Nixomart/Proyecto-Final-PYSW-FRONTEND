@@ -8,13 +8,6 @@
                 <div class="mb-3">
 
                     <h1>Parametros</h1>
-                    <label class="form-label" for="tipo">Vizualizar</label>
-                    <select class="form-select" name="tipo" id="tipo" required>
-                        <option value="pagos" selected>Pagos</option>
-                        <option value="ingresosDeAlumnos">Ingresos de alumnos</option>
-                        <option value="ingresosDeAlumnos">Ingresos de dinero</option>
-                        <option value="asistencias">Asistencias</option>
-                    </select>
                 </div>
                 <div class="">
                     <div class="mb-3">
@@ -28,8 +21,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="tipo">Tipo de Grafico</label>
                         <select class="form-select" name="tipo" id="tipo" [(ngModel)]="tipoGrafico" required>
-                            <option value="todos" selected>Todos</option>
-                            <option value="barra">Barra</option>
+                            <option value="barra"selected>Barra</option>
                             <option value="torta">Torta</option>
                         </select>
                     </div>
@@ -53,12 +45,18 @@
                 (chartClick)="chartClicked($event)">
             </canvas>
         </div>
-
+        
         <div class="col-8" *ngIf="tipoGrafico == 'torta'">
             <!-- Lo mismo pero  de torta -->
             <div class="chartContainer">
                 <apx-chart [series]="datosTorta" [chart]="chartDetails" [labels]="labelsTorta" [title]="tituloTorta"
                     [dataLabels]="chartDataLabels"></apx-chart>
             </div>
+        </div>
+        <div class="col-8">
+            <canvas baseChart class="chart" [data]="datosBarCharIng" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [type]="barChartTypeIng" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
         </div>
     </div>

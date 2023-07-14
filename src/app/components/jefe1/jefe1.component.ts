@@ -32,8 +32,6 @@ export class Jefe1Component implements OnInit {
     }
   };
 
-  chartLabels = ["Apple", "Microsoft", "Facebook", "Google"];
-
   chartTitle: ApexTitleSubtitle = {
     text: 'Leading Companies',
     align: 'center'
@@ -44,6 +42,7 @@ export class Jefe1Component implements OnInit {
   };
 
   datosBarChar!: ChartData<'bar'>;
+  datosBarCharIng!: ChartData<'bar'>;
   fechaInicio!: Date;
   fechaFin!: Date;
   arrayDatos!: Array<any>;
@@ -54,32 +53,19 @@ export class Jefe1Component implements OnInit {
 
   constructor(private cuotasService: CuotaService, private pagosService: PagoService) {
     this.arrayDatos = new Array<any>();
+    this.arrayPagos = new Array<any>();
     this.obtenerPagos();
+    
   }
 
-  tempDataPagos = [
-    { fecha: new Date("2022-03-25"), precio: 200 },
-    { fecha: new Date("2022-04-25"), precio: 400 },
-    { fecha: new Date("2022-04-25"), precio: 100 },
-    { fecha: new Date("2022-07-25"), precio: 300 },
-    { fecha: new Date("2022-08-25"), precio: 400 },
-    { fecha: new Date("2022-11-25"), precio: 200 },
-    { fecha: new Date("2022-12-25"), precio: 250 },
-    { fecha: new Date("2022-12-25"), precio: 20 },
-    { fecha: new Date("2023-01-25"), precio: 1100 },
-    { fecha: new Date("2023-01-25"), precio: 2000 }
-  ]
-
+  //filtro por fecha
   filtrarFecha() {
-     /* this.formatDate(this.fechaInicio)
-    this.formatDate(this.fechaFin)  */
     if (this.fechaInicio < this.fechaFin) {
       let fechaInicio = new Date(this.fechaInicio);
       let fechaFin = new Date(this.fechaFin);
 
       this.filtrado = true;
       this.arrayDatos = this.arrayDatos.filter(pago => (pago.fecha > fechaInicio) && (pago.fecha < fechaFin));
-      /* this.arrayDatos = this.arrayDatos.filter(pago => (pago.fecha >= new Date("2022-03-25")) && (pago.fecha <= new Date("2022-12-25"))); */
       this.limpiarFechas();
     }
   }
@@ -90,17 +76,19 @@ export class Jefe1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   tipoLabel!: string; // meses, year
   tipoEstadistica!: string; //pagos, ingresos alumnos, ingreso dinero, asistencias
   tipoGrafico: string = "barra"; // barra, torta
 
-  private cargarDatosLabel(): Array<any> {
+  private cargarDatosLabel(datos: Array<any>): Array<any> {
     let labels = new Array();
-    for (let pago of this.arrayDatos) {
+    for (let pago of datos) {
       let valor;
+      let currentYear;
+      
       if (this.tipoLabel === "year") {
         valor = pago.fecha.getFullYear();
       }
@@ -117,32 +105,22 @@ export class Jefe1Component implements OnInit {
 
   public actualizarGraficos() {
     this.obtenerPagos();
-    /* if (this.tipoGrafico === "barra") {
-      this.CargarGraficoBarras();
-    }
-    else if (this.tipoGrafico === "torta") {
-      this.cargarGraficoTorta();
-    }
-    else if (this.tipoGrafico === "todos") {
-      this.cargarGraficoTorta();
-      this.CargarGraficoBarras();
-    } */
   }
 
-  private cargarDatos(labels: Array<any>): Array<number> {
+  private cargarDatos(labels: Array<any>, datosBD: Array<any>, acumular: string): Array<number> {
     //Cargar valores por cada mes o anio
     let datos = new Array();
     for (let mesAnio of labels) {
       let valor = 0;
-      for (let pago of this.arrayDatos) {
+      for (let pago of datosBD) {
         if (this.tipoLabel === "year") {
           if (pago.fecha.getFullYear() === mesAnio) {
-            valor++;
+            valor = acumular == 'cantidad' ? valor + 1 : pago.precio;
           }
         }
         else {
           if (pago.fecha.toLocaleString('es-ES', { month: 'long' }) === mesAnio) {
-            valor++;
+            valor = acumular == 'cantidad' ? valor + 1 : pago.precio;
           }
         }
       }
@@ -158,9 +136,9 @@ export class Jefe1Component implements OnInit {
 
     this.filtrarFecha();
     //Labels inferiores, solo puede ser meses o anios
-    let labels = this.cargarDatosLabel();
+    let labels = this.cargarDatosLabel(this.arrayDatos);
     //Cargar valores por cada mes o anio
-    let datos = this.cargarDatos(labels);
+    let datos = this.cargarDatos(labels, this.arrayDatos, 'cantidad');
 
     this.datosBarChar = {
       labels: labels,
@@ -171,14 +149,30 @@ export class Jefe1Component implements OnInit {
     this.chart?.update();
   }
 
+  public CargarGraficoLineas(): void {
+
+    this.filtrarFecha();
+    //Labels inferiores, solo puede ser meses o anios
+    let labels = this.cargarDatosLabel(this.arrayDatos);
+    //Cargar valores por cada mes o anio
+    let datos = this.cargarDatos(labels, this.arrayDatos, 'precio');
+
+    this.datosBarCharIng = {
+      labels: labels,
+      datasets: [
+        { data: datos, label: "Ingresos" }
+      ]
+    };
+    this.chart?.update();
+  }
 
 
   public cargarGraficoTorta(): void {
     //Labels inferiores, solo puede ser meses o anios
-    let labels = this.cargarDatosLabel();
+    let labels = this.cargarDatosLabel(this.arrayDatos);
 
     //Cargar valores por cada mes o anio
-    let datos = this.cargarDatos(labels);
+    let datos = this.cargarDatos(labels, this.arrayDatos, 'cantidad');
 
     this.labelsTorta = labels;
     this.datosTorta = datos;
@@ -209,7 +203,11 @@ export class Jefe1Component implements OnInit {
     DataLabelsPlugin
   ];
 
-  obtenerPagos(){
+  public barChartTypeIng: ChartType = 'line';
+
+
+
+  obtenerPagos() {
     this.pagosService.getPagos().subscribe(
       (result) => {
         //console.log(result);
@@ -222,23 +220,28 @@ export class Jefe1Component implements OnInit {
         });
         this.CargarGraficoBarras();
         this.cargarGraficoTorta();
+        this.CargarGraficoLineas();
       },
       (error) => { console.log(error); }
     )
   }
 
-  formatDate(date: Date): string {
-    var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2)
-      month = '0' + month;
-    if (day.length < 2)
-      day = '0' + day;
-
-    return [year, month, day].join('-');
+  obtenerPagos2() {
+    this.pagosService.getPagos().subscribe(
+      (result) => {
+        //console.log(result);
+        this.arrayDatos = new Array<any>();
+        result.forEach((pago: Pago) => {
+          var aux: Pago = new Pago();
+          Object.assign(aux, pago);
+          aux.fecha = new Date(aux.fecha);
+          this.arrayPagos.push(aux);
+        });
+        this.CargarGraficoBarras();
+        this.cargarGraficoTorta();
+      },
+      (error) => { console.log(error); }
+    )
   }
 
   // events
