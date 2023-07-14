@@ -15,7 +15,8 @@ export class AlumnoService {
   public createAlumno(alumno: Alumno): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `${window.localStorage.getItem("token")}`
       }),
       params: new HttpParams()
     };
@@ -54,7 +55,7 @@ export class AlumnoService {
       }),
       params: new HttpParams()
     };
-    
+
     let body = {
       asistencias: plan
     };

@@ -1,4 +1,5 @@
-<!-- <div class="container">
+<app-navbargeneral></app-navbargeneral>
+<div class="container">
     <h1>LISTADO DE ALUMNOS</h1>
 
     <table class="table table-dark">
@@ -13,18 +14,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let a of alumnos">
-            
+          <tr *ngFor="let a of entrenadores">
+
             <td>{{a.nombre}} {{a.apellido}}</td>
             <td>{{a.email}}</td>
             <td>{{a.domicilio}}</td>
             <td>{{a.nroCelular}}</td>
             <td>{{a.dni}}</td>
             <td>
-              <button (click)="modificarAlumno(a)" class="btn btn-warning mx-1 my-1"><i class="fa-solid fa-pencil"></i></button>
-              <button (click)="eliminarAlumno(a)" class="btn btn-danger mx-1 my-1"><i class="fa-solid fa-trash"></i></button>
+              <button (click)="modificarEntrenador(a)" class="btn btn-warning mx-1 my-1"><i class="fa-solid fa-pencil"></i></button>
+              <button (click)="eliminarEntrenador(a)" class="btn btn-danger mx-1 my-1"><i class="fa-solid fa-trash"></i></button>
             </td>
           </tr>
         </tbody>
       </table>
-</div> -->
+</div>

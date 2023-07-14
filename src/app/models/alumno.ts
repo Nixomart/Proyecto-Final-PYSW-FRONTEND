@@ -10,24 +10,24 @@ export class Alumno {
   email!: string;
   nroCelular!: string;
   domicilio!: string;
-  fechaInicio!: string;
+  fechaInicio!: Date;
   plan!: Plan;
   usuario!: Usuario;
-  constructor(
-    nombre: string = '',
-    apellido: string = '',
-    email = '',
-    domiclio = '',
-    nroCelular = '',
-    dni: string = '',
-    usuario: Usuario = new Usuario()
-  ) {
-    this.nombre = nombre;
-    this.apellido = apellido;
-    this.dni = dni;
-    this.email = email;
-    this.usuario = usuario;
-    this.domicilio = domiclio;
-    this.nroCelular = nroCelular;
-  }
+  // constructor(
+  //   nombre: string = '',
+  //   apellido: string = '',
+  //   email = '',
+  //   domiclio = '',
+  //   nroCelular = '',
+  //   dni: string = '',
+  //   usuario: Usuario = new Usuario()
+  // ) {
+  //   this.nombre = nombre;
+  //   this.apellido = apellido;
+  //   this.dni = dni;
+  //   this.email = email;
+  //   this.usuario = usuario;
+  //   this.domicilio = domiclio;
+  //   this.nroCelular = nroCelular;
+  // }
 }
