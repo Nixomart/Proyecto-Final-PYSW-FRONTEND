@@ -28,6 +28,7 @@ import { AsistenciasComponent } from './components/entrenador/asistencias/asiste
 import { Jefe1Component } from './components/jefe1/jefe1.component';
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     FormsModule,
     HttpClientModule,
     NgChartsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
