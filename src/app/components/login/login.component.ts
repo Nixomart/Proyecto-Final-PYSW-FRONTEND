@@ -26,7 +26,9 @@ export class LoginComponent {
          if(result.rol == 'entrenador'){
           this.router.navigate(["generarRutinas"])
          }
-         
+         if(result.rol == 'duenio'){
+          this.router.navigate(["encargado/estadisticas"])
+         }
       })
     }else{
       console.log("NO HAY TOKEN NO HAY SESION");
@@ -58,6 +60,12 @@ export class LoginComponent {
         if (result.rol.nombreRol === 'entrenador') {
           this.datosUsuario.setUserData(result)
           this.router.navigate(["alumno/perfil"])
+          window.localStorage.setItem("token", `Bearer ${result.token}`)
+          console.log("LOGIN SUCCESS DATA: ", result);
+        }
+        if (result.rol.nombreRol === 'duenio') {
+          this.datosUsuario.setUserData(result)
+          this.router.navigate(["encargado/estadisticas"])
           window.localStorage.setItem("token", `Bearer ${result.token}`)
           console.log("LOGIN SUCCESS DATA: ", result);
         }

@@ -162,10 +162,16 @@
         </ul>
         <!-- ADMIN FUNCIONES -->
         <!-- encargado FUNCIONES -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="rol.rol == 'encargado'">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="rol.rol == 'duenio'">
           <!-- ALUMNO FUNCIONES -->
-         <h1>Bienvenido dueño!</h1>
-          <!-- ALUMNO FUNCIONES -->
+          <li class="nav-item">
+            <a
+              routerLink="/encargado/estadisticas"
+              class="text-decoration-none nav-link text-black"
+              href="#"
+              >Visualizar estadisticas</a
+            >
+          </li>
         </ul>
         <!-- encargado FUNCIONES -->
 
