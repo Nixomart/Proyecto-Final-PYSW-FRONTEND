@@ -14,31 +14,69 @@ export class PerfilComponent {
   today: Date = new Date();
   alumno: any;
   message: string = ''
+  diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+  calendario: { dia: string, fecha: string, asistencia: boolean }[];
+
+asistencia : Array<any> = []
   constructor(
-    private usuarioData: DatosUsuarioService,
     private usuarioService: UsuarioService,
     private alumnoService: AlumnoService,
     private router: Router
   ) {
-    this.today = new Date();
-  }
-  ngOnInit() {
+
+
     let token = window.localStorage.getItem('token');
     if (token) {
       this.usuarioService.getData(token).subscribe((result: any) => {
         this.alumno = result[0];
-        console.log("RESULTADO DE GET DATA USER RESEET PAGE: ",result);
+        this.asistencia = this.alumno.asistencias
         
       });
     }else{
       this.router.navigate(["login"])
     }
-    /* 
-    this.usuarioData.userData$.subscribe(userdata =>{
-      console.log("USER DATA: ", userdata.alumno[0]);
-      this.alumno = userdata.alumno[0]
+
+    this.calendario = [];
+    
+    
+  }
+  ngOnInit() {
+
+
+
+
+    let token = window.localStorage.getItem('token');
+    if (token) {
+      this.usuarioService.getData(token).subscribe((result: any) => {
+        this.alumno = result[0];
+        this.asistencia = this.alumno.asistencias
+        console.log("ASISTENCIAS DEL ALUMNO!!: ", this.alumno.asistencias);
+        
+
+        const fechaActual = new Date();
+        const primerDiaSemana = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() - fechaActual.getDay() + 1);
+
+    for (let i = 0; i < 5; i++) {
+      const fechaDia = new Date(primerDiaSemana.getFullYear(), primerDiaSemana.getMonth(), primerDiaSemana.getDate() + i);
+      const fechaString = fechaDia.toISOString().split('T')[0];
+      console.log("FECHA STRING: ", fechaString);
+      console.log("this asistencia: ", this.asistencia);
       
-    }) */
+      const asistenciaDia = this.asistencia.find(asistencia => asistencia.fecha.split('T')[0] === fechaString);
+      console.log("asistencia find????: ", asistenciaDia);
+      const asistencia = asistenciaDia ? asistenciaDia.asistido : false;
+
+      this.calendario.push({
+        dia: this.diasSemana[i],
+        fecha: fechaDia.toLocaleDateString(),
+        asistencia: asistencia
+      });
+      
+    }
+      });
+    }else{
+      this.router.navigate(["login"])
+    }
   }
   handleEdit = (editar: string) => {
     if (editar == 'editar') {

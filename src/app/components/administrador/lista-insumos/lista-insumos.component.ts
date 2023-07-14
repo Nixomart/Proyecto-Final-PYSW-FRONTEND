@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Insumo } from 'src/app/models/insumo';
 import { CategoriaService } from 'src/app/services/catgorias/categoria.service';
 import { InsumoService } from 'src/app/services/insumo.service';
@@ -9,19 +10,30 @@ import { InsumoService } from 'src/app/services/insumo.service';
   templateUrl: './lista-insumos.component.html',
   styleUrls: ['./lista-insumos.component.css']
 })
-export class ListaInsumosComponent {
+export class ListaInsumosComponent implements OnInit {
 
   insumos:Array<Insumo>;
   insumoa: any
   categorias: any
+  dtoptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
   constructor(private insumoSrevice: InsumoService, private router:Router, private categoriaService: CategoriaService){
     this.insumos = new Array<Insumo>();
     this.obtenerInsumos();
     this.categoriaService.getcategorias().subscribe((result)=> this.categorias = result)
   }
 
+  ngOnInit(): void {
+    this.dtoptions = {
+      pagingType: 'simple',
+
+    }
+  }
+  
   public obtenerInsumos(){
     this.insumoSrevice.getInsumos().subscribe((result:any) => {
+      this.dtTrigger.next(null);
       console.log(result);
       this.insumos = [];
       let unInsumo : Insumo = new Insumo();
