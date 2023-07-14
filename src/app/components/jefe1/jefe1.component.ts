@@ -3,7 +3,10 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexTitleSubtitle } from 'ng-apexcharts';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import { CuotasService } from 'src/app/services/cuotas.service';
+import { CuotaService } from 'src/app/services/cuota.service';
+import { PagoService } from 'src/app/services/pagos/pago.service';
+import { Pago } from 'src/app/models/pago';
+/* import { CuotasService } from 'src/app/services/cuotas.service'; */
 
 @Component({
   selector: 'app-jefe1',
@@ -13,8 +16,14 @@ import { CuotasService } from 'src/app/services/cuotas.service';
 
 export class Jefe1Component implements OnInit {
 
-  userChartSeries: ApexNonAxisChartSeries = [];
-  chartSeries: ApexNonAxisChartSeries = [];
+  //barra
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  datosTorta: ApexNonAxisChartSeries = [];
+  labelsTorta!: Array<any>;
+  tituloTorta: ApexTitleSubtitle = {
+    text: 'Pagos',
+    align: 'center'
+  };
 
   chartDetails: ApexChart = {
     type: 'pie',
@@ -34,32 +43,147 @@ export class Jefe1Component implements OnInit {
     enabled: true
   };
 
-  ngOnInit(): void { }
+  datosBarChar!: ChartData<'bar'>;
+  fechaInicio!: Date;
+  fechaFin!: Date;
+  arrayDatos!: Array<any>;
+  arrayPagos!: Array<any>;
+  filtrado!: Boolean;
 
-  createChart(): void {
-    //this.chartSeries = [...this.userChartSeries];
-    //this.chartSeries = this.userChartSeries.slice();
-    this.userChartSeries = [50, 20, 30, 45]; // Aquí puedes cargar los datos dinámicamente
-  this.chartSeries = this.userChartSeries;
-  
+
+
+  constructor(private cuotasService: CuotaService, private pagosService: PagoService) {
+    this.arrayDatos = new Array<any>();
+    this.obtenerPagos();
   }
-  formData = {
-    value1: 0,
-    value2: 0,
-    value3: 0,
-    value4: 0,
-  };
-  updateChart(): void {
-  this.userChartSeries = [
-    this.formData.value1,
-    this.formData.value2,
-    this.formData.value3,
-    this.formData.value4,
-  ];
-  this.chartSeries = this.userChartSeries;
-}
-  //barra
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+
+  tempDataPagos = [
+    { fecha: new Date("2022-03-25"), precio: 200 },
+    { fecha: new Date("2022-04-25"), precio: 400 },
+    { fecha: new Date("2022-04-25"), precio: 100 },
+    { fecha: new Date("2022-07-25"), precio: 300 },
+    { fecha: new Date("2022-08-25"), precio: 400 },
+    { fecha: new Date("2022-11-25"), precio: 200 },
+    { fecha: new Date("2022-12-25"), precio: 250 },
+    { fecha: new Date("2022-12-25"), precio: 20 },
+    { fecha: new Date("2023-01-25"), precio: 1100 },
+    { fecha: new Date("2023-01-25"), precio: 2000 }
+  ]
+
+  filtrarFecha() {
+     /* this.formatDate(this.fechaInicio)
+    this.formatDate(this.fechaFin)  */
+    if (this.fechaInicio < this.fechaFin) {
+      let fechaInicio = new Date(this.fechaInicio);
+      let fechaFin = new Date(this.fechaFin);
+
+      this.filtrado = true;
+      this.arrayDatos = this.arrayDatos.filter(pago => (pago.fecha > fechaInicio) && (pago.fecha < fechaFin));
+      /* this.arrayDatos = this.arrayDatos.filter(pago => (pago.fecha >= new Date("2022-03-25")) && (pago.fecha <= new Date("2022-12-25"))); */
+      this.limpiarFechas();
+    }
+  }
+
+  limpiarFechas() {
+    this.fechaInicio = new Date();
+    this.fechaFin = new Date();
+  }
+
+  ngOnInit(): void {
+    
+  }
+
+  tipoLabel!: string; // meses, year
+  tipoEstadistica!: string; //pagos, ingresos alumnos, ingreso dinero, asistencias
+  tipoGrafico: string = "barra"; // barra, torta
+
+  private cargarDatosLabel(): Array<any> {
+    let labels = new Array();
+    for (let pago of this.arrayDatos) {
+      let valor;
+      if (this.tipoLabel === "year") {
+        valor = pago.fecha.getFullYear();
+      }
+      else {
+        valor = pago.fecha.toLocaleString('es-ES', { month: 'long' });
+      }
+
+      if (!labels.includes(valor)) {
+        labels.push(valor);
+      }
+    }
+    return labels;
+  }
+
+  public actualizarGraficos() {
+    this.obtenerPagos();
+    /* if (this.tipoGrafico === "barra") {
+      this.CargarGraficoBarras();
+    }
+    else if (this.tipoGrafico === "torta") {
+      this.cargarGraficoTorta();
+    }
+    else if (this.tipoGrafico === "todos") {
+      this.cargarGraficoTorta();
+      this.CargarGraficoBarras();
+    } */
+  }
+
+  private cargarDatos(labels: Array<any>): Array<number> {
+    //Cargar valores por cada mes o anio
+    let datos = new Array();
+    for (let mesAnio of labels) {
+      let valor = 0;
+      for (let pago of this.arrayDatos) {
+        if (this.tipoLabel === "year") {
+          if (pago.fecha.getFullYear() === mesAnio) {
+            valor++;
+          }
+        }
+        else {
+          if (pago.fecha.toLocaleString('es-ES', { month: 'long' }) === mesAnio) {
+            valor++;
+          }
+        }
+      }
+
+      //Se guarda el valor
+      datos.push(valor);
+    }
+
+    return datos;
+  }
+
+  public CargarGraficoBarras(): void {
+
+    this.filtrarFecha();
+    //Labels inferiores, solo puede ser meses o anios
+    let labels = this.cargarDatosLabel();
+    //Cargar valores por cada mes o anio
+    let datos = this.cargarDatos(labels);
+
+    this.datosBarChar = {
+      labels: labels,
+      datasets: [
+        { data: datos, label: "Pagos" }
+      ]
+    };
+    this.chart?.update();
+  }
+
+
+
+  public cargarGraficoTorta(): void {
+    //Labels inferiores, solo puede ser meses o anios
+    let labels = this.cargarDatosLabel();
+
+    //Cargar valores por cada mes o anio
+    let datos = this.cargarDatos(labels);
+
+    this.labelsTorta = labels;
+    this.datosTorta = datos;
+
+  }
 
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -67,7 +191,7 @@ export class Jefe1Component implements OnInit {
     scales: {
       x: {},
       y: {
-        min: 10
+        min: 0
       }
     },
     plugins: {
@@ -85,52 +209,44 @@ export class Jefe1Component implements OnInit {
     DataLabelsPlugin
   ];
 
-  public barChartData: ChartData<'bar'> = {
-    labels: [ '2006', '2007', '2008', '2009', '2010', '2011', '2012' ],
-    datasets: [
-      { data: [ 65, 59, 80, 81, 56, 55, 40 ], label: 'Series A' },
-      { data: [ 28, 48, 40, 19, 86, 27, 90 ], label: 'Series B' }
-    ]
-  };
+  obtenerPagos(){
+    this.pagosService.getPagos().subscribe(
+      (result) => {
+        //console.log(result);
+        this.arrayDatos = new Array<any>();
+        result.forEach((pago: Pago) => {
+          var aux: Pago = new Pago();
+          Object.assign(aux, pago);
+          aux.fecha = new Date(aux.fecha);
+          this.arrayDatos.push(aux);
+        });
+        this.CargarGraficoBarras();
+        this.cargarGraficoTorta();
+      },
+      (error) => { console.log(error); }
+    )
+  }
+
+  formatDate(date: Date): string {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
 
   // events
   public chartClicked({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
+    /* console.log(event, active); */
   }
 
   public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
-    console.log(event, active);
+    /* console.log(event, active); */
   }
-
-  public randomize(): void {
-    // Only Change 3 values
-    this.barChartData.datasets[0].data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.round(Math.random() * 100),
-      56,
-      Math.round(Math.random() * 100),
-      40 ];
-
-    this.chart?.update();
-  }
-  ///Manejar de cuotas
-  constructor(private cuotasService: CuotasService) { }
-  public obtenerCuotas(): void {
-    this.cuotasService.getCuotas().subscribe(
-      (response: any) => {
-        // Aquí puedes acceder a los datos de la respuesta
-        console.log(response);
-        // Realiza las operaciones necesarias con los datos
-      },
-      (error: any) => {
-        // Maneja cualquier error que ocurra durante la solicitud
-        console.error(error);
-      }
-    );
-  }
-
-  //Manejar asistencia de Alumnos:
-  
 }

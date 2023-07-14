@@ -15,9 +15,9 @@ import { ListaInsumosComponent } from './components/administrador/lista-insumos/
 import { PerfilComponent } from './components/alumno/perfil/perfil.component';
 import { VerSubscripcionComponent } from './components/alumno/ver-subscripcion/ver-subscripcion.component';
 import { SemanarutinasComponent } from './components/alumno/semanarutinas/semanarutinas.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 // import { ValidacionDirective } from './directivas/validacion.directive';
-import { CaracterEspecial }from './directivas/validacion.directive';
+import { CaracterEspecial } from './directivas/validacion.directive';
 import { FormularioEntrenadorComponent } from './components/administrador/formulario-entrenador/formulario-entrenador.component';
 import { ListaEntrenadoresComponent } from './components/administrador/lista-entrenadores/lista-entrenadores.component'
 import { InsumosComponent } from './components/alumno/insumos/insumos.component';
@@ -25,7 +25,9 @@ import { NavbargeneralComponent } from './components/navbargeneral/navbargeneral
 import { GenerarRutinasComponent } from './components/entrenador/generar-rutinas/generar-rutinas.component';
 import { FormulariopagosssComponent } from './components/administrador/formulariopagosss/formulariopagosss.component';
 import { AsistenciasComponent } from './components/entrenador/asistencias/asistencias.component';
-
+import { Jefe1Component } from './components/jefe1/jefe1.component';
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,13 +54,16 @@ import { AsistenciasComponent } from './components/entrenador/asistencias/asiste
     GenerarRutinasComponent,
     FormulariopagosssComponent,
     AsistenciasComponent,
+    Jefe1Component
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
