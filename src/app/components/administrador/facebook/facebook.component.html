@@ -1,0 +1,48 @@
+<!-- Formulario para postear solo texto -->
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="text-input">Texto</label>
+      <input id="text-input" class="form-control" type="text" [(ngModel)]="mensaje" name="mensaje">
+    </div>
+    <button class="btn btn-primary" (click)="postFb()">Postear</button>
+  </form>
+</div>
+
+<!-- Formulario para postear texto e imagen -->
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="text-input">Texto</label>
+      <input id="text-input" class="form-control" type="text" [(ngModel)]="mensaje2" name="mensaje">
+    </div>
+    <div class="form-group">
+      <label for="image-url-input">URL de la imagen</label>
+      <input id="image-url-input" class="form-control" type="text" [(ngModel)]="urlImg" name="urlImg">
+    </div>
+    <button class="btn btn-primary" (click)="postFbImage()">Postear</button>
+  </form>
+</div>
+
+<!-- Formulario para postear link con imagen -->
+<!-- <div class="container">
+  <form>
+    <div class="form-group">
+      <label for="text-input">Texto</label>
+      <input id="text-input" class="form-control" type="text" [(ngModel)]="mensaje3" name="mensaje">
+    </div>
+    <div class="form-group">
+      <label for="image-url-input">URL de la imagen</label>
+      <input id="image-url-input" class="form-control" type="text" [(ngModel)]="urlImg" name="urlImg">
+    </div>
+    <div class="form-group">
+      <label for="image-url-input">Link de la Pagina</label>
+      <input id="image-url-input" class="form-control" type="text" [(ngModel)]="link" name="urlImg">
+    </div>
+    <button class="btn btn-primary" (click)="postFbImageLink()">Postear</button>
+  </form>
+</div> -->
+
+
+
+

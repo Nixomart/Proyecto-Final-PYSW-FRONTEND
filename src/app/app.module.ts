@@ -25,6 +25,8 @@ import { NavbargeneralComponent } from './components/navbargeneral/navbargeneral
 import { GenerarRutinasComponent } from './components/entrenador/generar-rutinas/generar-rutinas.component';
 import { FormulariopagosssComponent } from './components/administrador/formulariopagosss/formulariopagosss.component';
 import { AsistenciasComponent } from './components/entrenador/asistencias/asistencias.component';
+import { FacebookComponent } from './components/administrador/facebook/facebook.component';
+import { FacebookModule } from 'ngx-facebook';
 
 @NgModule({
   declarations: [
@@ -52,13 +54,15 @@ import { AsistenciasComponent } from './components/entrenador/asistencias/asiste
     GenerarRutinasComponent,
     FormulariopagosssComponent,
     AsistenciasComponent,
+    FacebookComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FacebookModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
