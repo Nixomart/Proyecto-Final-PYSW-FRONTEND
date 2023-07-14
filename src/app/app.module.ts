@@ -26,7 +26,10 @@ import { GenerarRutinasComponent } from './components/entrenador/generar-rutinas
 import { FormulariopagosssComponent } from './components/administrador/formulariopagosss/formulariopagosss.component';
 import { AsistenciasComponent } from './components/entrenador/asistencias/asistencias.component';
 import { FacebookComponent } from './components/administrador/facebook/facebook.component';
-import { FacebookModule } from 'ngx-facebook';
+import { CalendarComponent } from './components/entrenador/calendar/calendar.component';
+// import { FacebookModule } from 'ngx-facebook';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { CalendarioAlumnoComponent } from './components/alumno/calendario-alumno/calendario-alumno.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { FacebookModule } from 'ngx-facebook';
     GenerarRutinasComponent,
     FormulariopagosssComponent,
     AsistenciasComponent,
-    FacebookComponent,
+    CalendarComponent,
+    CalendarioAlumnoComponent
 
   ],
   imports: [
@@ -62,7 +66,8 @@ import { FacebookModule } from 'ngx-facebook';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    FacebookModule.forRoot()
+    OAuthModule.forRoot()
+    // FacebookModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

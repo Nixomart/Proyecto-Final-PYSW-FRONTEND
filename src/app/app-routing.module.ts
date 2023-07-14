@@ -20,6 +20,8 @@ import { GenerarRutinasComponent } from './components/entrenador/generar-rutinas
 import { FormularioPagosComponent } from './components/administrador/formulario-pagos/formulario-pagos.component';
 import { FormulariopagosssComponent } from './components/administrador/formulariopagosss/formulariopagosss.component';
 import { AsistenciasComponent } from './components/entrenador/asistencias/asistencias.component';
+import { CalendarComponent } from './components/entrenador/calendar/calendar.component';
+import { CalendarioAlumnoComponent } from './components/alumno/calendario-alumno/calendario-alumno.component';
 
 
 const routes: Routes = [
@@ -40,10 +42,12 @@ const routes: Routes = [
 //ENTRENADOR
 { path: 'generarRutinas', component: GenerarRutinasComponent},
 { path: 'asistencia', component: AsistenciasComponent},
+{ path: 'calendar', component: CalendarComponent},
   //rutas alumno
   { path: 'alumno/perfil', component: PerfilComponent },
   { path: 'alumno/cuota', component: VerSubscripcionComponent },
   { path: 'alumno/calendario', component: SemanarutinasComponent },
+  { path: 'alumno/calendarioGoogle', component: CalendarioAlumnoComponent },
   { path: 'alumno/insumos', component: InsumosComponent },
   { path: '**', component: HomeComponent },
 
