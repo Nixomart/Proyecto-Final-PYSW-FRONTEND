@@ -37,7 +37,7 @@
               </div>
               <div class="mb-3">
                   <label for="" class="form-label">Ingresar DNI</label>
-                  <input [(ngModel)]="alumno.dni" name="dni" type="number" class="form-control" placeholder="Ejemplo: 42682738" required minlength="7" #dni="ngModel">
+                  <input [(ngModel)]="alumno.dni" name="dni" type="number" class="form-control" placeholder="Ejemplo: 42682738" required minlength="7" required maxlength="8" #dni="ngModel">
                   <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">
                       <div *ngIf="dni.errors?.['required']">
                           DNI es requerido.
@@ -45,6 +45,9 @@
                       <div *ngIf="dni.errors?.['minlength']">
                           DNI debe tener al menos 7 caracteres.
                       </div>
+                      <div *ngIf="dni.errors?.['maxlength']">
+                        DNI debe tener como máximo 8 caracteres.
+                    </div>
                   </div>
               </div>
               <div class="mb-3">
