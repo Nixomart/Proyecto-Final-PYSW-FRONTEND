@@ -25,6 +25,11 @@ import { NavbargeneralComponent } from './components/navbargeneral/navbargeneral
 import { GenerarRutinasComponent } from './components/entrenador/generar-rutinas/generar-rutinas.component';
 import { FormulariopagosssComponent } from './components/administrador/formulariopagosss/formulariopagosss.component';
 import { AsistenciasComponent } from './components/entrenador/asistencias/asistencias.component';
+import { FacebookComponent } from './components/administrador/facebook/facebook.component';
+import { CalendarComponent } from './components/entrenador/calendar/calendar.component';
+// import { FacebookModule } from 'ngx-facebook';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { CalendarioAlumnoComponent } from './components/alumno/calendario-alumno/calendario-alumno.component';
 
 @NgModule({
   declarations: [
@@ -52,13 +57,17 @@ import { AsistenciasComponent } from './components/entrenador/asistencias/asiste
     GenerarRutinasComponent,
     FormulariopagosssComponent,
     AsistenciasComponent,
+    CalendarComponent,
+    CalendarioAlumnoComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot()
+    // FacebookModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

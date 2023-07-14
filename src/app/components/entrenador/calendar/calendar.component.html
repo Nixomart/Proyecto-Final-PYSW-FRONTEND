@@ -1,0 +1,17 @@
+<app-navbargeneral></app-navbargeneral>
+<button type="button" (click)="login()">01 login</button>
+<button type="button" (click)="token()">02 Token</button>
+<button type="button" (click)="verEventos()">03 Eventos</button>
+<form class="border border-1 m-3">
+  <div class="form-group">
+    <label for="my-input">Event Title</label>
+    <input id="sumary" class="form-control" type="text" [(ngModel)]="summary" name="sumary">
+    <label for="my-input">Event to</label>
+    <input id="to" class="form-control" type="datetime-local" [(ngModel)]="toDate" name="to">
+    <label for="my-input">Event From</label>
+    <input id="from" class="form-control" type="datetime-local" [(ngModel)]="fromDate" name="from">
+  </div>
+  <button type="button" (click)="postEvent()">04 Crear Evento</button>
+</form>
+<button type="button" (click)="logout()">05 logout</button>
+<iframe *ngIf="showIframe" src="https://calendar.google.com/calendar/embed?src=54fa1906b86afadc65b1dcaa5bbb4d0a38ec29cdacbbfda9e21a586aebb45e31%40group.calendar.google.com&ctz=UTC" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
