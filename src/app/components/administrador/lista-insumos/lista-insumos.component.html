@@ -5,17 +5,7 @@
   <a class="btn btn-success" href="administrador/formulario/insumo/0"
     >Registrar Insumo</a
   >
-  <div class="d-flex align-items-center">
-    <label class="form-label mb-2" for="">filtrar por: </label>
-    <select class="form-select" style="width: min-content">
-      <option value="">opcion1</option>
-      <option value="">opcion2</option>
-      <option value="">opcion3</option>
-      <option value="">opcion4</option>
-    </select>
-    <button class="btn btn-warning">Fitrar</button>
-  </div>
-  <table class="table shadow-lg border-5">
+  <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table shadow-lg border-5">
     <thead class="">
       <tr>
         <th scope="col">nombre</th>

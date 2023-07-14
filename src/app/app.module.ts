@@ -15,9 +15,9 @@ import { ListaInsumosComponent } from './components/administrador/lista-insumos/
 import { PerfilComponent } from './components/alumno/perfil/perfil.component';
 import { VerSubscripcionComponent } from './components/alumno/ver-subscripcion/ver-subscripcion.component';
 import { SemanarutinasComponent } from './components/alumno/semanarutinas/semanarutinas.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 // import { ValidacionDirective } from './directivas/validacion.directive';
-import { CaracterEspecial }from './directivas/validacion.directive';
+import { CaracterEspecial } from './directivas/validacion.directive';
 import { FormularioEntrenadorComponent } from './components/administrador/formulario-entrenador/formulario-entrenador.component';
 import { ListaEntrenadoresComponent } from './components/administrador/lista-entrenadores/lista-entrenadores.component'
 import { InsumosComponent } from './components/alumno/insumos/insumos.component';
@@ -25,6 +25,10 @@ import { NavbargeneralComponent } from './components/navbargeneral/navbargeneral
 import { GenerarRutinasComponent } from './components/entrenador/generar-rutinas/generar-rutinas.component';
 import { FormulariopagosssComponent } from './components/administrador/formulariopagosss/formulariopagosss.component';
 import { AsistenciasComponent } from './components/entrenador/asistencias/asistencias.component';
+import { Jefe1Component } from './components/jefe1/jefe1.component';
+import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { DataTablesModule } from 'angular-datatables'; 
 import { FacebookComponent } from './components/administrador/facebook/facebook.component';
 import { CalendarComponent } from './components/entrenador/calendar/calendar.component';
 // import { FacebookModule } from 'ngx-facebook';
@@ -57,6 +61,7 @@ import { CalendarioAlumnoComponent } from './components/alumno/calendario-alumno
     GenerarRutinasComponent,
     FormulariopagosssComponent,
     AsistenciasComponent,
+    Jefe1Component,
     CalendarComponent,
     CalendarioAlumnoComponent
 
@@ -65,6 +70,10 @@ import { CalendarioAlumnoComponent } from './components/alumno/calendario-alumno
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    NgChartsModule,
+    NgApexchartsModule,
+    DataTablesModule,
     HttpClientModule,
     OAuthModule.forRoot()
     // FacebookModule.forRoot()

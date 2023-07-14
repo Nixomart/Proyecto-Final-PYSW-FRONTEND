@@ -1,0 +1,62 @@
+<div class="container">
+    <h1>Ingresar Datos a Buscar:</h1>
+    <h1 class="text-center my-3">Estadísticas</h1>
+    <div class="my-3 row">
+        <div class="filter-seccion mb-3 col-4">
+            <!---FORMULARIOS-->
+            <form action="" class=" ms-3" #form="ngForm">
+                <div class="mb-3">
+
+                    <h1>Parametros</h1>
+                </div>
+                <div class="">
+                    <div class="mb-3">
+                        <label class="form-label" for="fechaInicio">Fecha Inicio</label>
+                        <input type="date" class="form-control" [(ngModel)]="fechaInicio" name="fechaInicio" id="fechaInicio" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="fechaFin">Fecha Fin</label>
+                        <input type="date" class="form-control" [(ngModel)]="fechaFin" name="fechaFin" id="fechaFin" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tipo">Tipo de Grafico</label>
+                        <select class="form-select" name="tipo" id="tipo" [(ngModel)]="tipoGrafico" required>
+                            <option value="barra"selected>Barra</option>
+                            <option value="torta">Torta</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tipoFecha">Filtrar por</label>
+                        <select class="form-select" name="tipoFecha" id="tipoFecha" [(ngModel)]="tipoLabel" required>
+                            <option value="meses" selected>Meses</option>
+                            <option value="year">Años</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary" (click)="actualizarGraficos()">Filtrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- GRAFICO del formulario de arriba-->
+        <div class="col-8" *ngIf="tipoGrafico == 'barra'">
+            <canvas baseChart class="chart" [data]="datosBarChar" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [type]="barChartType" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
+        </div>
+        
+        <div class="col-8" *ngIf="tipoGrafico == 'torta'">
+            <!-- Lo mismo pero  de torta -->
+            <div class="chartContainer">
+                <apx-chart [series]="datosTorta" [chart]="chartDetails" [labels]="labelsTorta" [title]="tituloTorta"
+                    [dataLabels]="chartDataLabels"></apx-chart>
+            </div>
+        </div>
+        <div class="col-8">
+            <canvas baseChart class="chart" [data]="datosBarCharIng" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [type]="barChartTypeIng" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+            </canvas>
+        </div>
+    </div>
