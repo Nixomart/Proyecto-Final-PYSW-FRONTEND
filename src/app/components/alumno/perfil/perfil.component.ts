@@ -50,7 +50,8 @@ asistencia : Array<any> = []
       this.usuarioService.getData(token).subscribe((result: any) => {
         this.alumno = result[0];
         this.asistencia = this.alumno.asistencias
-
+        console.log("ASISTENCIAS DEL ALUMNO!!: ", this.alumno.asistencias);
+        
 
         const fechaActual = new Date();
         const primerDiaSemana = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() - fechaActual.getDay() + 1);
