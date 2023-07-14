@@ -89,6 +89,8 @@ export class GenerarRutinasComponent {
   }
   setearModificar = (alumn:any) =>{
     this.alumnoa = alumn
+    console.log("ALUMNO EJERCICIO", this.alumnoa.ejercicios.Lunes[0].nombreEjercicio);
+    console.log("ALUMNO EJERCICIO", this.alumnoa.ejercicios.Lunes[0]);
   }
   guardar = (alum:any) =>{
     

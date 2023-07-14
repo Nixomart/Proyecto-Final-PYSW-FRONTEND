@@ -17,10 +17,10 @@
         <td>{{ alumno.plan == null ? "No tiene plan" : alumno.plan.nombrePlan }}</td>
         <td>
           <button
-            data-bs-toggle="modal"
+   data-bs-toggle="modal"
             data-bs-target="#exampleModal"
-            (click)="setearModificar(alumno)"
             class="btn btn-warning mx-1 my-1"
+            (click)="setearModificar(alumno)"
           >
             <i class="fa-solid fa-pencil"></i>
           </button>
@@ -67,13 +67,14 @@
           <h3>DIA LUNES</h3>
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default"
-              >Ejercicio</span
+              >Ejercicio Primero</span
             >
             <input
               type="text"
               [(ngModel)]="rutinasBueno.Lunes[0].nombreEjercicio"
               class="form-control"
               aria-label="Sizing example input"
+              [placeholder]="alumnoa.ejercicios.Lunes[0].nombreEjercicio"
               aria-describedby="inputGroup-sizing-default"
             />
           </div>
@@ -471,6 +472,7 @@
         </button>
         <button
           (click)="guardar(alumnoa)"
+          data-bs-dismiss="modal"
           type="button"
           class="btn btn-primary"
         >
