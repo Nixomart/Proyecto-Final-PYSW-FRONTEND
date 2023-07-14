@@ -150,7 +150,7 @@ export class FormularioEntrenadorComponent implements OnInit {
     console.log("-------creando entrenador-------")
     setTimeout(() => {
         this.crearEntrenador();
-    }, 1000);
+    }, 6000);
 }
 
   public guardarEntrenador(){
