@@ -5,6 +5,7 @@ import { Plan } from 'src/app/models/plan';
 import { Rol } from 'src/app/models/rol';
 import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumno.service';
+import { CorreoService } from 'src/app/services/correo/correo.service';
 import { PlanService } from 'src/app/services/plannes/plan.service';
 import { RolService } from 'src/app/services/rol.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
@@ -24,13 +25,14 @@ export class FormularioAlumnoComponent implements OnInit {
   usuario:Usuario = new Usuario();
   id: string = "64ab6fa76a2c15a8d6a07475";
   user:Usuario = new Usuario();
-
+  alumnoacrear: Alumno = new Alumno()
   constructor(private alumnoService: AlumnoService,
     private activaedRoute:ActivatedRoute,
     private router:Router,
     private planService:PlanService,
     private usuarioService:UsuarioService,
-    private rolService:RolService
+    private rolService:RolService,
+    private correo: CorreoService
     ){
     this.alumno = new Alumno();
     this.planes = new Array<Plan>();
@@ -154,27 +156,45 @@ export class FormularioAlumnoComponent implements OnInit {
 
   public crearUsuario(){
     this.usuario.rol = this.rol;
-    console.log(this.usuario);
+    console.log("USUARIO?? ", this.usuario);
     this.usuarioService.createUser(this.usuario).subscribe((result: any) => {
       console.log("-----USUARIO GUARDADO?-----");
       console.log(result);
     })
+    console.log("alumno crado? ", this.alumno, );
     this.obtenerUsuarios();
   }
 
   public confirmarAlta(){
-    console.log("-------creando usuario-------")
+    let rol = new Rol()
+    rol._id= '64aada555467cf7bcb2d5614'
+    console.log("ALUMNO A CREAR!!: ", this.alumnoacrear);
+    console.log("usuario A CREAR!!: ", this.usuario);
+    this.usuario.rol = rol
+    this.alumnoacrear.usuario = this.usuario
+    console.log("ALUMNO A CREAR COMPLETO!!!!!!!!!!!!!!!!!!!: ", this.alumnoacrear);
+
+    this.usuarioService.createAlumnoYUsuario(this.alumnoacrear).subscribe((result)=>{
+      console.log("RESULTADO DE CREAR!!: ", result);
+    })
+this.correo.enviarCorreo(this.alumnoacrear).subscribe((result)=>{
+  console.log("RESULT DE CORREO; ", result);
+  
+})
+    
+  /*   console.log("-------creando usuario-------")
     this.crearUsuario();
     this.obtenerUsuarios();
     console.log("-------creando alumno-------")
     setTimeout(() => {
         this.crearAlumno();
-    }, 1000);
+    }, 1000); */
 }
 
   public guardarAlumno(){
     this.alumno = new Alumno();
     this.router.navigate(["administrador/formulario/alumno", 0])
+
 
   }
 

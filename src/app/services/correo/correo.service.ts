@@ -15,9 +15,12 @@ export class CorreoService {
 
       }),
     }
-    console.log("CORREO EN SERVICE: ",pago );
-    let body = pago
-    /* return this._http.post(this.urlBase + "/send-email", body, httpOptions); */
-    return this._http.get(this.urlBase + "/")
+    let body = {
+      nombre: pago.nombre,
+      username: pago.usuario.nombreUsuario,
+      password: pago.usuario.password,
+      emailTo: pago.email
+    }
+    return this._http.post(this.urlBase + "/send-email", body, httpOptions);
   }
 }

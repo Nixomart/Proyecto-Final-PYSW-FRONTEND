@@ -9,7 +9,7 @@
               <legend class="text-center">Registrar Alumno</legend>
               <div class="mb-3">
                   <label for="disabledTextInput" class="form-label">Ingresar nombre</label>
-                  <input [(ngModel)]="alumno.nombre" name="nombre" type="text" class="form-control" placeholder=" Ejemplo: juan, marcos, julieta, etc..." required minlength="3" #nombre="ngModel" caracter-especial>
+                  <input [(ngModel)]="alumnoacrear.nombre" name="nombre" type="text" class="form-control" placeholder=" Ejemplo: juan, marcos, julieta, etc..." required minlength="3" #nombre="ngModel" caracter-especial>
                   <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
                           <div *ngIf="nombre.errors?.['required']">
                               Nombre es requerido.
@@ -25,7 +25,7 @@
               </div>
               <div class="mb-3">
                   <label for="disabledTextInput" class="form-label">Ingresar apellido</label>
-                  <input [(ngModel)]="alumno.apellido" name="apellido" type="text" class="form-control" placeholder=" Ejemplo: Sanchez, Messi, Fernandez, etc.." required minlength="3" #apellido="ngModel">
+                  <input [(ngModel)]="alumnoacrear.apellido" name="apellido" type="text" class="form-control" placeholder=" Ejemplo: Sanchez, Messi, Fernandez, etc.." required minlength="3" #apellido="ngModel">
                   <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)" class="alert alert-danger">
                       <div *ngIf="apellido.errors?.['required']">
                           Apellido es requerido.
@@ -37,7 +37,7 @@
               </div>
               <div class="mb-3">
                   <label for="" class="form-label">Ingresar DNI</label>
-                  <input [(ngModel)]="alumno.dni" name="dni" type="number" class="form-control" placeholder="Ejemplo: 42682738" required minlength="7" required maxlength="8" #dni="ngModel">
+                  <input [(ngModel)]="alumnoacrear.dni" name="dni" type="number" class="form-control" placeholder="Ejemplo: 42682738" required minlength="7" required maxlength="8" #dni="ngModel">
                   <div *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert alert-danger">
                       <div *ngIf="dni.errors?.['required']">
                           DNI es requerido.
@@ -52,11 +52,11 @@
               </div>
               <div class="mb-3">
                   <label for="" class="form-label">Fecha de Nacimiento</label>
-                  <input [(ngModel)]="alumno.fechaNacimiento" name="fechaNacimiento" type="date" class="form-control">
+                  <input [(ngModel)]="alumnoacrear.fechaNacimiento" name="fechaNacimiento" type="date" class="form-control">
               </div>
               <div class="mb-3">
                   <label for="disabledTextInput" class="form-label">Ingresar numero de celular</label>
-                  <input [(ngModel)]="alumno.nroCelular" name="nroCelular" type="text" class="form-control" placeholder=" Ejemplo: 3881273823 " required minlength="9" #nroCelular="ngModel">
+                  <input [(ngModel)]="alumnoacrear.nroCelular" name="nroCelular" type="text" class="form-control" placeholder=" Ejemplo: 3881273823 " required minlength="9" #nroCelular="ngModel">
                   <div *ngIf="nroCelular.invalid && (nroCelular.dirty || nroCelular.touched)" class="alert alert-danger">
                       <div *ngIf="nroCelular.errors?.['required']">
                           NÚmero de celular es requerido.
@@ -68,7 +68,7 @@
               </div>
               <div class="mb-3">
                   <label for="disabledTextInput" class="form-label">Ingresar domicilio</label>
-                  <input [(ngModel)]="alumno.domicilio" name="domicilio" type="text" class="form-control" placeholder="Ejemplo: Barrio ... , Calle ... , num ..." required minlength="24" #domicilio="ngModel">
+                  <input [(ngModel)]="alumnoacrear.domicilio" name="domicilio" type="text" class="form-control" placeholder="Ejemplo: Barrio ... , Calle ... , num ..." required minlength="24" #domicilio="ngModel">
                   <div *ngIf="domicilio.invalid && (domicilio.dirty || domicilio.touched)" class="alert alert-danger">
                       <div *ngIf="domicilio.errors?.['required']">
                           Domicilio es requerido.
@@ -80,13 +80,13 @@
               </div>
               <div class="mb-3">
                   <label for="disabledTextInput" class="form-label">ELija un Plan</label>
-                  <select name="plan" [(ngModel)]="alumno.plan" class="form-control" >
+                  <select name="plan" [(ngModel)]="alumnoacrear.plan" class="form-control" >
                     <option *ngFor="let plan of planes" [ngValue]="plan">{{plan.nombrePlan}}</option>
                   </select>
               </div>
               <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                  <input [(ngModel)]="alumno.email" name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com"required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" #email="ngModel" />
+                  <input [(ngModel)]="alumnoacrear.email" name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com"required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" #email="ngModel" />
                   <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
                   <div *ngIf="!email.valid && email.touched">
                     El email no es válido.
